@@ -9,7 +9,7 @@
 // void : 출력의 형태, 반환값
 void Output()
 {
-	printf_s("Hello Wordl!!Wn");
+	printf_s("Hello Wordl!!\n");
 
 	return;
 
@@ -55,10 +55,10 @@ int main(voide)
 	// wb = backspace(삭제)
 	// \\ = \ 표현
 
-	printf("gootWbdWtchancewn");
-	printf("10,000wwwn")
+	printf("goot\bd\tchance\n");
+	printf("10,000\\\n");
 
-	pfintf("%d과 %의 합은 %d 입니다.\n", 14254, 23421, 14254 + 23421)
+	printf("%d과 %d의 합은 %d 입니다.\n", 14254, 23421, 14254 + 23421);
 
 	// ** 진수 표현
 	printf("10진수 : %d\n", 10);
