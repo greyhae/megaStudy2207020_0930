@@ -9,27 +9,60 @@ int main(void) {
 
 	// if ~ else¹®
 	{
-		char* Name;
+		//char* Name;
 		int Number;
 
 		printf("ÀÔ·Â : ");
-		scanf("%d", &Number);
+		scanf_s("%d", &Number);
 
 		if (Number == 1)
 		{
-			Name = (char*)"È«±æµ¿";
+			//Name = (char*)"È«±æµ¿";
+			printf("È«±æµ¿");
 		}
 		else if (Number == 2)
 		{
-			Name = (char*)"ÀÓ²©Á¤";
+			//Name = (char*)"ÀÓ²©Á¤";
+			printf("ÀÓ²©Á¤");
+		}
+		else if (Number == 3)
+		{
+			//Name = (char*)"ÀÌ¸ù·æ";
+			printf("ÀÌ¸ù·æ");
 		}
 		else
 		{
-			Name = (char*)"ÀÌ¸ù·æ";
+			printf("Àß¸ø ÀÔ·ÂÇÏ¿´½À´Ï´Ù.");
 		}
 
-		printf("°á°ú°ª : %s\n", Name);
+		//printf("°á°ú°ª : %s\n", Name);
 		printf("\n");
+	}
+
+	// switch ~ case¹®
+	{
+		int Number;
+
+		printf("ÀÔ·Â : ");
+		scanf_s("%d", &Number);
+
+		switch (Number)
+		{
+		case 1:
+			printf("È«±æµ¿");
+			break;
+		case 2:
+			printf("ÀÓ²©Á¤");
+			break;
+		case 3:
+			printf("ÀÌ¸ù·æ");
+			break;
+		default:
+			printf("Àß¸ø ÀÔ·ÂÇÏ¿´½À´Ï´Ù.");
+			break;
+		}
+
+		printf("\n\n");
 	}
 
 	return 0;
