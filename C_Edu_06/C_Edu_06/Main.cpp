@@ -9,7 +9,7 @@ int main(void)
 
 	{
 		// ** 반복문 while
-		
+
 		// ** 조건이 무한루프 조건일때
 		while (true)
 		{
@@ -40,7 +40,7 @@ int main(void)
 		// 반복문 for
 
 		// ** for문의 무한루프 조건일때
-		for (;true;)
+		for (; true;)
 		{
 			printf("for 반복문\n");
 
@@ -62,16 +62,57 @@ int main(void)
 	}
 
 	{
-
 		do
 		{
+			// ** 최초 1회는 반드시 실행됨
 			printf("최초에 한번은 실행됨");
 			break;
-		} while (false);
 
+			// ** 그 후에 조건을 확인하고 조건이 true인 경우 반복
+		} while (false);
 		printf("\n");
 	}
 
+	// ** 반복문의 중복 사용
+	// [구구단]
+	{
+		int x, y;
+
+		printf_s("시작단/끝단 입력 : ");
+		scanf_s("%d %d", &x, &y);
+		for (int i = x; i < y + 1; ++i)
+		{
+			for (int j = 2; j < 10; ++j)
+			{
+				/*
+				if ((j % 2 == 1)) {
+					continue;
+				}*/
+				//if (i % 2 || !(j % 2))
+					//continue;
+
+				//if (i % 2 && !(j % 2))
+					printf_s("%d x %d = %d\n", i, j, i * j);
+				
+			}
+			printf("\n");
+		}
+		printf("\n");
+	}
+
+	{
+		int i, j;
+		
+		for (i = 0; i < 3; i++)
+		{
+			for (j = 0; j < 5; j++)
+			{
+				printf("*");
+			}
+			printf("\n");
+		}
+
+	}
 
 
 	return 0;
