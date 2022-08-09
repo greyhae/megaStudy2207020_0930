@@ -8,6 +8,31 @@
 int sum(int x, int y);
 // ** 전방 선언은 항상 main(void)의 상단에 위치시켜야 한다.
 
+// 함수 전방 선언시 매개변수의 이름은 생략해도 된다.
+void Output(int, int);
+int Compare(int _x, int _y);
+void 재귀함수();
+
+// ** 함수가 재귀적으로 호출되기 때문에 종료되는 구간이 없다면 스택 오버프로우 발생한다.
+/*
+void Recursive()
+{
+	printf("재귀호출");
+	Recursive();
+}
+*/
+
+// ** 매개변수를 사용하여  재귀함수의 
+void Recursive(int _n)
+{
+	if(_n == 0)
+		return;
+	else
+		printf("%d 재귀호출\n", _n);
+		Recursive(_n - 1);
+		
+}
+
 int main(void)
 {
 	int a = 10, b = 20;
@@ -58,14 +83,39 @@ int main(void)
 		int result = sum(a, b);
 	}
 
+	Output(10, 20);
+
+	int result2 = Compare(30, 30);
+	printf("%d\n", result2);
+
+	Recursive(5);
+
 	return 0;
 }
 
 // 함수의 정의
+// ** 매개변수는 뒤에서부터 복제된다.
 int sum(int x, int y) {
 	int temp;
 
 	temp = x + y;
 
 	return temp;
+}
+
+// void Output(void) = > void는 생략 가능
+void Output(int _x, int _y)
+{
+	//printf("Output 함수 호출됨");
+	printf("%d + %d = %d 입니다.\n", _x, _y, _x + _y);
+}
+
+int Compare(int _x, int _y)
+{
+	if (_x > _y)
+		return _x;
+	else if (_x < _y)
+		return _y;
+	else
+		return 0;
 }
