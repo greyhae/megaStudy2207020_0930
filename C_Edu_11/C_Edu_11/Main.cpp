@@ -1,11 +1,14 @@
 /*
-* Chapter 11 : 아스키 코드 값과 문자 입출력 함수
+* Chapter 11 : 배열과 포인터
 */
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string>
 #include <malloc.h>
+
+void print_arr(int* _pArr, int _size);
+//void print_arr(int _pArr[], int _size);
 
 int main(void)
 {
@@ -44,23 +47,82 @@ int main(void)
 		// ** 포인터 변수에 문자를 직접 입력받을 수 없음
 		char* Buffer = (char*)"한글";
 		
-		scanf("%s", Buffer);
-		printf("%s", Buffer);
+		//scanf("%s", Buffer);
+		//printf("%s", Buffer);
 	}
 
 	{
 		char Buffer[128] = "";
 
-		scanf("%s", Buffer);
-		printf("%s", Buffer);
+		//scanf("%s", Buffer);
+		//printf("%s", Buffer);
 
 	}
 
 	{
-		int* Number = (int*)malloc(sizeof(int) * 10);
+		/*int* Number = (int*)malloc(sizeof(int) * 10);
 
 		for (int i = 0; i > 10; ++i)
 			Number[i] = i + 1;
+
+		for (int i = 0; i > 10; ++i)
+			printf("%d\n", Number[i]);
+		printf("sizeof : %d", sizeof(Number));*/
 	}
+
+	{
+		int Array[5] = { 10,20,30,40,50 };
+
+		int* pArr = Array;
+		int* pArr2 = Array + 2;
+
+		printf("1. 주소 : %d\n", Array); // 시작 주소
+		printf("1. 값 : %d\n", Array); // 시작 주소
+		printf("2 :. %d\n", *(Array + 1)); // 20
+		printf("3 주소. : %d\n", *pArr2 + 2); // 30의 주소
+		printf("3. 값 : %d\n", pArr[3]); // 40
+		printf("4. : %d\n", pArr[3]); // 40
+		printf("5. %d\n", *pArr2); // 30
+		printf("6. %d\n", pArr2 - pArr); // 2
+		printf("7. %d\n", pArr2[-2]); // 10
+	}
+	printf("\n");
+
+	int Array[5] = { 10,20,30,40,50 };
+
+	print_arr(Array, 5);
+
+	// 배열이 선언된 영역 안에서 배열의 크기를 아래와 같은 계산식을 통해 그 크기를 알수 있다.
+	int Size = sizeof(Array) / sizeof(Array[0]);
+
+	printf("%d\n", Size);
+
 	return 0;
+}
+
+
+// ** 배열을 전달할 때에는 [int*]와 같은 방식으로 아래와 같이 전달 가능
+/*
+void print_arr(int _pArr[], int _size)
+{
+
+	for (int i = 0; i < _size; ++i)
+	{
+		printf("%d\n", _pArr[i]);
+		// 또는 
+		//printf("%d\n", *(_pArr + 1));
+	}
+}
+*/
+
+// ** 배열을 함수로 전달할 때에는 반드시 배열의 크기를 함께 전달해야 한다.
+void print_arr(int* _pArr, int _size)
+{
+
+	for (int i = 0; i < _size; ++i)
+	{
+		printf("%d\n", _pArr[i]);
+		// 또는 
+		//printf("%d\n", *(_pArr + 1));
+	}
 }
