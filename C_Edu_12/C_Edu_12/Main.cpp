@@ -17,7 +17,7 @@ int main(void)
 	printf("\n");
 
 	// ** 451p ¿¹Á¦
-	{
+	{ 
 
 		int* pi;
 		double* pd;
