@@ -61,6 +61,25 @@ int main(void)
 		printf("%f\n", f);
 	}
 
+	// ** int* pi = (int*)malloc(메모리를 할당한 크기);
+	// ** int* pi = (int*)malloc(sizeof(int));
+	// ** int* pi = (int*)malloc(4); 숫자를 사용해도 됨
+
+	{
+		const int MAX = 8;
+
+		int* Array = (int*)malloc(sizeof(int) * MAX);
+
+		for (int i = 0; i < MAX; ++i)
+		{
+			Array[i] = ( 10 * i + 10);
+		}
+		for (int i = 0; i < MAX; ++i)
+		{
+			printf("%d\n", Array[i]);
+		}
+	}
+
 	return 0;
 
 }
