@@ -9,7 +9,20 @@ int main(void)
 {
 	/*
 	{
+		// ** 열거형 : 정수, 상수
+		enum {
+			AAA, // 0
+			BBB, // 1
+			CCC, // 2
+			DDD = 10, // 10
+			EEE, // 11
+			FFF // 12
+		};
+
+		int Array[FFF];
+
 		int Num = 1;
+
 		switch (Num)
 		{
 		case 1:
@@ -21,24 +34,12 @@ int main(void)
 		case 3:
 
 			break;
-		case 4:
+		case FFF:
 
 			break;
 		}
 	}
 	*/
-
-	{
-		// ** 열거형 : 정수, 상수
-		enum {
-			AAA, // 0
-			BBB, // 1
-			CCC, // 2
-			DDD = 10, // 10
-			EEE, // 11
-			FFF // 12
-		};
-	}
 
 	{
 		struct Object
@@ -48,13 +49,12 @@ int main(void)
 		};
 
 		// ** 열거형의 이름을 붙임.
-		enum ObjectID
+		enum class ObjectID
 		{
 			PLAYER,
 			ENEMY,
 			BULLET,
 			BOSS,
-			IETEM,
 			MAX,
 		};
 
@@ -63,7 +63,7 @@ int main(void)
 		ObjectList[PLAYER].Name = (char*)"Player";
 		ObjectList[PLAYER].Lev = 10;
 
-		ObjectList[ENEMY].Name = (char*)"Enmy";
+		ObjectList[ENEMY].Name = (char*)"Enemy";
 		ObjectList[ENEMY].Lev = 5;
 
 		ObjectList[BULLET].Name = (char*)"Bullet";
@@ -74,7 +74,7 @@ int main(void)
 
 		for (int i = 0; i < MAX; ++i)
 		{
-			printf("%s의 레벨은 : %d\n",
+			printf("%s의 레벨은 : %d\n\n",
 				ObjectList[i].Name,
 				ObjectList[i].Lev);
 		}
@@ -92,10 +92,11 @@ int main(void)
 		};
 
 		SceneID StateID = SceneID::LOGO;
+
 		while(true)
 		{ 
 			// ** 콘솔 버퍼 청소
-			// sysstem("cls");
+			// system("cls");
 			switch (StateID)
 			{
 			case SceneID::LOGO:
@@ -153,7 +154,7 @@ int main(void)
 				int KorScore;
 				int EngSCore;
 				int MathScore;
-			};
+			}STD;
 		}
 
 		{
@@ -164,22 +165,11 @@ int main(void)
 				int KorScore;
 				int EngSCore;
 				int MathScore;
-			}STD1, STD2, STD3, *PSTD;
+			}STD1, STD2, STD3, * PSTD, STD;
+
+			PSTD Test = (PSTD)malloc(sizeof(STD));
 		}
 	}
-
-
-	// ** 
-	typedef struct Student
-	{
-		char* Name;
-		int KorScore;
-		int EngSCore;
-		int MathScore;
-	}STD1, STD2, STD3, *PSTD, STD;
-
-	PSTD Test = (PSTD)malloc(sizeof(STD));
-	
 
 	return 0;
 }
