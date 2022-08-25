@@ -1,9 +1,7 @@
 // ** 기본 입출력
 #include <stdio.h>
-
 // ** system 함수
 #include <stdlib.h>
-
 // ** input 및 윈도우창을 제어할 때 사용되 라이브러리
 #include <Windows.h>
 
