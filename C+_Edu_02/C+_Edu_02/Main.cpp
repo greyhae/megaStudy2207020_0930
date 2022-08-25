@@ -5,18 +5,29 @@
 // ** input 및 윈도우창을 제어할 때 사용되 라이브러리
 #include <Windows.h>
 
+struct Vector2
+{
+	int x, y;
+};
+
+bool Horzontal, Vertical;
+
 void SetCursorPosition(int _x, int _y);
 void ShowCursor(bool _b);
+
+
 
 int main(void)
 {
 	ShowCursor(false);
 	ULONGLONG Time = GetTickCount64();
 
-	int x = 0, y = 0;
-	char* Tex = (char*)"△";
+	// ** 플레이어 좌표
+	Vector2 PlayPostion;
+	PlayPostion.x = 0;
+	PlayPostion.y = 0;
 
-
+	char* Texture = (char*)"△";
 
 	while (true)
 	{
@@ -24,67 +35,17 @@ int main(void)
 		{
 			Time = GetTickCount64();
 
-			// ** 키 입력
-			// GetAsyncKeyState() = 키입력 함수
-			// 상황에 따라서 다음을 반환함
-			// 0x0000,  0x0001,  0x8000,  0x8001
+			// ** 화면 클리어
+			system("cls");
 
-			// ** 뒤쪽 0과 1의 차이
-			// ** 0 : 이전에 눌릭적 있음
-			// ** 1 : 이전에 눌린적 없음
+			// 
+			bool Horzontal = false;
+			bool Vertical = false;
 
-			// ** 앞쪽 8과 0의 차이
-			// 0 : 현재 눌리 않음
-			// 8 : 현재 눌림
+			InputKey(&PlayPostion, Texture);
 
-			// ** 매개 변수로 Virtual Key를 입력 받는다.
-
-			//printf("%x\n", GetAsyncKeyState(VK_UP));
-			//if(GetAsyncKeyState(VK_UP) & 0x01)\
-				printf("zzz\n");
-
-			/**
-			if (GetAsyncKeyState(VK_UP) & 0x01)
-				printf("UP\n");
-
-			if (GetAsyncKeyState(VK_DOWN) & 0x01)
-				printf("DOWN\n");
-
-			if (GetAsyncKeyState(VK_LEFT) & 0x01)
-				printf("LEFT\n");
-
-			if (GetAsyncKeyState(VK_RIGHT) & 0x01)
-				printf("RIGHT\n");
-			*/
-
-			if (GetAsyncKeyState(VK_UP))
-			{
-				y--;
-				Tex = (char*)"△";
-				
-			}
-
-			if (GetAsyncKeyState(VK_DOWN))
-			{
-				y++;
-				Tex = (char*)"▽";
-			}
-				
-
-			if (GetAsyncKeyState(VK_LEFT))
-			{
-				x--;
-				Tex = (char*)"◁";
-			}
-
-			if (GetAsyncKeyState(VK_RIGHT))
-			{
-				x++;
-				Tex = (char*)"▷";
-			}
-
-			SetCursorPosition(x, y);
-			printf("%s", Tex);
+			SetCursorPosition(PlayPostion.x, PlayPostion.y);
+			printf("%s", Texture);
 		}
 	}
 
@@ -95,7 +56,7 @@ int main(void)
 void SetCursorPosition(int _x, int _y)
 {
 	// ** 좌표를 설정
-	COORD pos = { _x, _y };
+	COORD pos = { (short)_x, (short)_y };
 
 	// ** 설정한 좌료포 이동시키는 함수
 	SetConsoleCursorPosition(
@@ -121,4 +82,88 @@ void ShowCursor(bool _b)
 	// ** 커서의 설정을 적용시키는 함수
 	SetConsoleCursorInfo(
 		GetStdHandle(STD_OUTPUT_HANDLE), &Info);
+}
+
+void InputKey(Vector2* _Position, char* _Texture)
+{
+	// ** 키 입력
+	// GetAsyncKeyState() = 키입력 함수
+	// 상황에 따라서 다음을 반환함
+	// 0x0000,  0x0001,  0x8000,  0x8001
+
+	// ** 뒤쪽 0과 1의 차이
+	// ** 0 : 이전에 눌릭적 있음
+	// ** 1 : 이전에 눌린적 없음
+
+	// ** 앞쪽 8과 0의 차이
+	// 0 : 현재 눌리 않음
+	// 8 : 현재 눌림
+
+	// ** 매개 변수로 Virtual Key를 입력 받는다.
+
+	//printf("%x\n", GetAsyncKeyState(VK_UP));
+	//if(GetAsyncKeyState(VK_UP) & 0x01)\
+					printf("zzz\n");
+
+	/*
+	if (GetAsyncKeyState(VK_UP) & 0x01)
+		printf("UP\n");
+
+	if (GetAsyncKeyState(VK_DOWN) & 0x01)
+		printf("DOWN\n");
+
+	if (GetAsyncKeyState(VK_LEFT) & 0x01)
+		printf("LEFT\n");
+
+	if (GetAsyncKeyState(VK_RIGHT) & 0x01)
+		printf("RIGHT\n");
+	*/
+
+		if (GetAsyncKeyState(VK_UP) && !Horzontal)
+		{
+			// ** y 좌표가 0보다 클 때만 입력을 받은다.
+			if (_Position->y > 0)
+				_Position->y--;
+			/*
+			if (y <= 0)
+				y = 0;
+			*/
+
+			_Texture = (char*)"△";
+			Vertical = true;
+		}
+		else
+			Vertical = false;
+
+		if (GetAsyncKeyState(VK_DOWN) && !Horzontal)
+		{
+			// ** y 좌표가 39보다 작을 때만 입력을 받은다.
+			if (_Position->y > 39)
+				_Position->y++;
+			_Texture = (char*)"▽";
+			Vertical = true;
+		}
+		else
+			Vertical = false;
+
+		if (GetAsyncKeyState(VK_LEFT) && !Vertical)
+		{
+			if (_Position->x > 0)
+				_Position->x--;
+			_Texture = (char*)"◁";
+			Horzontal = true;
+		}
+		else
+			Horzontal = false;
+
+		if (GetAsyncKeyState(VK_RIGHT) && !Vertical)
+		{
+			// ** y 좌표가 39보다 작을 때만 입력을 받은다.
+			if (_Position->x > 118)
+				_Position->x++;
+			_Texture = (char*)"▷";
+			Horzontal = true;
+		}
+		else
+			Horzontal = false;
 }
