@@ -10,16 +10,24 @@ struct Vector2
 	int x, y;
 };
 
-bool Horzontal, Vertical;
+// ** true/false 둘 중에 하나만 반환
+// ** 키 입력이 횡 이동일때를 확인
+bool Horzontal = false;
+
+// ** 키 입력이 종 이동일때를 확인
+bool Vertical = false;
 
 void SetCursorPosition(int _x, int _y);
 void ShowCursor(bool _b);
-
+void InputKey(Vector2* _Position, char* _Texture);
 
 
 int main(void)
 {
+	// ** 커서를 안 보이게 설정
 	ShowCursor(false);
+
+	// ** 시간 세팅
 	ULONGLONG Time = GetTickCount64();
 
 	// ** 플레이어 좌표
@@ -38,13 +46,13 @@ int main(void)
 			// ** 화면 클리어
 			system("cls");
 
-			// 
-			bool Horzontal = false;
-			bool Vertical = false;
 
 			InputKey(&PlayPostion, Texture);
 
-			SetCursorPosition(PlayPostion.x, PlayPostion.y);
+			SetCursorPosition(
+				PlayPostion.x, 
+				PlayPostion.y);
+
 			printf("%s", Texture);
 		}
 	}
@@ -56,7 +64,7 @@ int main(void)
 void SetCursorPosition(int _x, int _y)
 {
 	// ** 좌표를 설정
-	COORD pos = { (short)_x, (short)_y };
+	COORD pos = { (SHORT)_x, (SHORT)_y };
 
 	// ** 설정한 좌료포 이동시키는 함수
 	SetConsoleCursorPosition(
@@ -138,8 +146,9 @@ void InputKey(Vector2* _Position, char* _Texture)
 		if (GetAsyncKeyState(VK_DOWN) && !Horzontal)
 		{
 			// ** y 좌표가 39보다 작을 때만 입력을 받은다.
-			if (_Position->y > 39)
+			if (_Position->y < 39)
 				_Position->y++;
+
 			_Texture = (char*)"▽";
 			Vertical = true;
 		}
@@ -150,6 +159,7 @@ void InputKey(Vector2* _Position, char* _Texture)
 		{
 			if (_Position->x > 0)
 				_Position->x--;
+
 			_Texture = (char*)"◁";
 			Horzontal = true;
 		}
@@ -159,8 +169,9 @@ void InputKey(Vector2* _Position, char* _Texture)
 		if (GetAsyncKeyState(VK_RIGHT) && !Vertical)
 		{
 			// ** y 좌표가 39보다 작을 때만 입력을 받은다.
-			if (_Position->x > 118)
+			if (_Position->x < 118)
 				_Position->x++;
+
 			_Texture = (char*)"▷";
 			Horzontal = true;
 		}
