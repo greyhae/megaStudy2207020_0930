@@ -64,8 +64,8 @@ int main(void)
 		Bullet[i].Position.x = 118;
 		Bullet[i].Position.y = rand() % 40;
 
-		Bullet[i].Position.Scale = 2;
-		Bullet[i].Position.Scale = 1;
+		Bullet[i].Position.Scale.x = 2;
+		Bullet[i].Position.Scale.y = 1;
 
 
 		Bullet[i].Texture = (char*)"*";
