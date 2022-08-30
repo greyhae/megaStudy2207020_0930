@@ -71,7 +71,6 @@ int main(void)
 
 	Enemy.Position = Vector2(int(120 * 0.3333f * 2), 40 >> 1);
 	Enemy.Texture = (char*)"■";
-	Enemy.Position = Vector2((int)strlen(Enemy.Texture), 1);
 	Enemy.Scale = Vector2((int)strlen(Enemy.Texture), 1);
 	//Enemy.Position.x = int(120 * 0.3333f * 2);
 	//Enemy.Position.y = 40>>1;
@@ -79,6 +78,37 @@ int main(void)
 	//emy.Scale.x = (int)strlen(Enemy.Texture);
 	//emy.Scale.y = 1;
 
+		// ** 여분의 총알을 준비해둔다
+	Object Bullet[128];// 2의 보수
+
+	// ** 총알이 발사 되었는지 확인하는 용도
+	bool ShowBullet[128];
+
+	// ** 총알의 생성간의 간격을 주기 위함
+	ULONGLONG BulletDelay = GetTickCount64();
+
+	for (int i = 0; i < 128; i++)
+	{
+		// ** srand = 랜덤하숨 초기화
+		srand(
+			// ** 현재 시간을 제곱하여 알수없는 값으로 초기화
+			GetTickCount64() * GetTickCount64());
+
+		// ** rand() = 랜덤 함수
+		// ** rdad() % 40 = 0 ~ 39 사이의 랜덤값
+
+		Bullet[i].Position = Vector2(118, int(rand() % 40));
+		Bullet[i].Texture = (char*)"*";
+		Enemy.Scale = Vector2(2, 1);
+
+		//Bullet[i].Position.x = 118;
+		//Bullet[i].Position.y = rand() % 40;
+		//Bullet[i].Scale.x = 2;
+		//Bullet[i].Scale.y = 1;
+		//Bullet[i].Texture = (char*)"*";
+
+		ShowBullet[i] = false;
+	}
 
 	while (true)
 	{
@@ -110,7 +140,89 @@ int main(void)
 
 			printf("%s", Enemy.Texture);
 
+
+			/*
+			* 총알 생성
+			* 2.5초 간격으로 총알을 생성하고, 생성하는 과정에서 현재 비활성화 되어있는 총알을 찾아 좌료를 수정하고,
+			* 활성화 상태로 변경한다. 총알을 1발만 생성할 것이므로 활성화로 변경이 완료되면 즉시 반복문을 탈출한다.
+			*/
+			for (int i = 0; i < 128; i++)
+			{
+				// ** 총알이 2.5초 다윈로 생성됨
+				if (BulletDelay + 2500 < GetTickCount64())
+				{
+					// if(ShowBullet[i] == false)
+					// ** 총알이 비활성화 상태라면
+					if (!ShowBullet[i])
+					{
+						// ** 재생성 되었다면 좌표를 다시 초기화 해준다.
+						//Bullet[i].Position.x = 118;
+						//Bullet[i].Position.y = rand() % 40;
+						Bullet[i].Position = Vector2(118, int(rand() % 40));
+
+						// ** 현재 상태를 활성화 상태로 변경한다.
+						ShowBullet[i] = true;
+
+						// ** 시간값을 재 초기화 한다.
+						BulletDelay = GetTickCount64();
+
+						// ** 총알을 1개만 활성화 할 것이기 때문에
+						// ** 반복문을 빠져나간다.
+						break;
+					}
+				}
+			}
+
+			for (int i = 0; i < 128; i++)
+			{
+
+				// if(ShowBullet[i] == true)
+				// ** 총알이 활성화 상태라면
+				if (ShowBullet[i])
+				{
+					// ** 총알의 이동
+					// ** 이동방향 : ←←←
+					Bullet[i].Position.x--;
+
+					// ** 충돌판정 : 총알 좌표가 0이 되면 총알 좌표 초기화 해준다.
+					if (Bullet[i].Position.x <= 0)
+					{
+						ShowBullet[i] = false;
+						continue;
+					}
+
+					// ** 크기값을 함께 설정해서 범위 충돌 만들어야 함 : 집에서 Scale를 이용해서 해 볼것
+					/*
+					if (Bullet[i].Position.x == Player.Position.x &&
+						Bullet[i].Position.y == Player.Position.y)
+					{
+						ShowBullet[i] = false;
+						continue;
+					}
+					*/
+
+					// ** 충돌
+
+					if (Player.Position.x + 2 > Enemy.Position.x &&
+						Enemy.Position.x + 2 > Player.Position.x &&
+						Player.Position.y == Enemy.Position.y)
+					{
+						SetCursorPosition(120 >> 1, 1);
+						printf("충돌입니다.");
+					}
+
+					// ** 총알이 제 위치에 그려질 수 있도록 커서를 이동시킨다.
+					SetCursorPosition(
+						Bullet[i].Position.x,
+						Bullet[i].Position.y);
+
+					// ** 총알을 그린다.
+					printf("%s", Bullet[i].Texture);
+				}
+			}
+
 			// ** 충돌
+			/*
 			if (Player.Position.x + 2 > Enemy.Position.x &&
 				Enemy.Position.x + 2 > Player.Position.x &&
 				Player.Position.y == Enemy.Position.y)
@@ -118,6 +230,7 @@ int main(void)
 				SetCursorPosition(120 >> 1, 1);
 				printf("충돌입니다.");
 			}
+			*/
 		}
 	}
 
