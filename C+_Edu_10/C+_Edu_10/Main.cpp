@@ -1,41 +1,37 @@
 #include "Headers.h"
 
 // ** 키 입력 함수 수정.
-// ** 파일 입출력
-char* LogoTex[9];
+// ** 파일 입출력.
+char* LogoTex[23];
 
-// ** 아래 LogoTex 내용 파일로 불러오기
-
-static char* MenuTex[9] = {
-	(char*)"__       __  ________  __    __  __    __",
-	(char*)"/ M     /  |/        |/  M  /  |/  |  /  |",
-	(char*)"$$  M / $$ | $$$$$$$$ / $$  M $$ | $$ | $$ |",
-	(char*)"$$$  M / $$$ | $$ | __    $$$  M$$ | $$ | $$ |",
-	(char*)"$$$$ / $$$$ | $$ | $$$$  $$ | $$ | $$ |",
-	(char*)"$$ $$ $$ / $$ | $$$$$ / $$ $$ $$ | $$ | $$ |",
-	(char*)"$$ | $$$ / $$ | $$ | _____ $$ | $$$$ | $$ M__$$ |",
-	(char*)"$$ | $ / $$ | $$ | $$ | $$$ | $$    $$ /",
-	(char*)"$$ / $$ / $$$$$$$$ / $$ / $$ / $$$$$$ /"
-};
-
-
-
-
-
-
-
-
+static char* MenuTex[16] = {
+	(char*)"MMMMMMMM               MMMMMMMM",
+	(char*)"M:::::::M             M:::::::M",
+	(char*)"M::::::::M           M::::::::M",
+	(char*)"M:::::::::M         M:::::::::M",
+	(char*)"M::::::::::M       M::::::::::M    eeeeeeeeeeee    nnnn  nnnnnnnn    uuuuuu    uuuuuu",
+	(char*)"M:::::::::::M     M:::::::::::M  ee::::::::::::ee  n:::nn::::::::nn  u::::u    u::::u",
+	(char*)"M:::::::M::::M   M::::M:::::::M e::::::eeeee:::::een::::::::::::::nn u::::u    u::::u",
+	(char*)"M::::::M M::::M M::::M M::::::Me::::::e     e:::::enn:::::::::::::::nu::::u    u::::u",
+	(char*)"M::::::M  M::::M::::M  M::::::Me:::::::eeeee::::::e  n:::::nnnn:::::nu::::u    u::::u",
+	(char*)"M::::::M   M:::::::M   M::::::Me:::::::::::::::::e   n::::n    n::::nu::::u    u::::u",
+	(char*)"M::::::M    M:::::M    M::::::Me::::::eeeeeeeeeee    n::::n    n::::nu::::u    u::::u",
+	(char*)"M::::::M     MMMMM     M::::::Me:::::::e             n::::n    n::::nu:::::uuuu:::::u",
+	(char*)"M::::::M               M::::::Me::::::::e            n::::n    n::::nu:::::::::::::::uu",
+	(char*)"M::::::M               M::::::M e::::::::eeeeeeee    n::::n    n::::n u:::::::::::::::u",
+	(char*)"M::::::M               M::::::M  ee:::::::::::::e    n::::n    n::::n  uu::::::::uu:::u",
+	(char*)"MMMMMMMM               MMMMMMMM    eeeeeeeeeeeeee    nnnnnn    nnnnnn    uuuuuuuu  uuuu" };
 
 // ** 장면전환을 하기위한 변수
 // ** 현재 장면을 보관한다.
 SceneID SceneState = SceneID::LOGO;
 
-// ** 어떤 키를 입력받았는지 확인하기 위한 변수
+// ** 어떤 키를 입력 받았는지 확인하기 위한 변수.
 static DWORD KeyState = 0;
 
 
 
-void SetScene(Object* _pPlayer, Object* _pEnemy);
+void SetScene(Object* _pPlayer, Object* _pEnemy, Object* _pBullet);
 char* ReadAll(char* _FileName);
 void ReadLine(char* _FileName, char** _LogoTex);
 
@@ -52,13 +48,19 @@ void MenuProgress();
 void MenuRender(char* _str[], int _size, int _x, int _y);
 
 void StageInitialize();
-void StageProgress(Object* _Player, Object* _Enemy);
-void StageRender(Object* _Player, Object* _Enemy);
+void StageProgress(Object* _Player, Object* _Enemy, Object* _pBullet);
+void StageRender(Object* _Player, Object* _Enemy, Object* _pBullet);
 bool Collision(Object* _Temp, Object* _Dest);
 
+bool Check[128];
 
 int main(void)
 {
+	//BulletInitialize 함수로
+	Object* Bullet = (Object*)malloc(sizeof(Object) * 128);
+	//Bullet = nullptr;
+	for (int i = 0; i < 128; ++i)
+		Check[i] = false;
 	ShowCursor(false);
 
 	ULONGLONG Time = GetTickCount64();
@@ -70,7 +72,7 @@ int main(void)
 	Object* Enemy = CreateObject(int(120 * 0.3333f * 2), 40 >> 1, (char*)"■");
 
 	LogoInitialize();
-	LogoProgress();
+	StageInitialize();
 
 	while (true)
 	{
@@ -81,35 +83,38 @@ int main(void)
 			system("cls");
 
 			InputKey();
-			SetScene(pPlayer, Enemy);
+			SetScene(pPlayer, Enemy, Bullet);
 		}
 	}
+
+
+
 
 	return 0;
 }
 
 
-void SetScene(Object* _pPlayer, Object* _pEnemy)
+void SetScene(Object* _pPlayer, Object* _pEnemy, Object* _pBullet)
 {
 	switch (SceneState)
 	{
 	case SceneID::LOGO:
 	{
 		LogoProgress();
-		LogoRender(LogoTex, 9, 38, 10);
+		LogoRender(LogoTex, 23, 22, 5);
 	}
 	break;
 
 	case SceneID::MENU:
 	{
 		MenuProgress();
-		MenuRender(MenuTex, 9, 38, 10);
+		MenuRender(MenuTex, 16, 17, 8);
 	}
 	break;
 
 	case SceneID::STAGE:
-		StageProgress(_pPlayer, _pEnemy);
-		StageRender(_pPlayer, _pEnemy);
+		StageProgress(_pPlayer, _pEnemy, _pBullet);
+		StageRender(_pPlayer, _pEnemy, _pBullet);
 		break;
 
 	case SceneID::EXIT:
@@ -118,28 +123,27 @@ void SetScene(Object* _pPlayer, Object* _pEnemy)
 	}
 }
 
-// ** 데이터 전제 불러오기
+// ** 데이터 전체 불러오기.
 char* ReadAll(char* _FileName)
 {
 	/*
-	* r  = 읽기 전용
-	* r+ = 읽기 + 쓰기 함께 지원하지만 파일이 없으면 안됨.
-	* w  = 쓰기 전용 (덮어쓰기를 하기 때문에 주의)
-	* w+ = 읽기 + 쓰기 함께 지원하지만 덮어쓰기를 하기때문에 주의
-	
+	* r = 읽기 전용
+	* r+ = 읽기+쓰기 함께 지원하지만 파일이 없으면 안됨.
+	* w = 쓰기 전용 (덮어쓰기를 하기때문에 주의)
+	* w+ = 읽기+쓰기 함께 지원하지만 덮어쓰기를 하기때문에 주의
+
 	* [파일 입출력 함수]
-	* fopen : 파일 열기, 파일을 열지 않으면 데이터에 접근이 불가
-	* fclose : 파일 닫기, 파일이 열려있는 상태로 계속 유지됨
+	* fopen : 파일 열기, 파일을 열지 않으면 데이터에 접근이 불가.
+	* fclose : 파일 닫기, 파일이 열려있는 상태로 계속 유지됨.
 	* fgetc : 파일에서 문자 읽기
-	* fgetc : 파일에서 문자열 읽기
-	
+	* fgets : 파일에서 문자열 읽기
+
 	* fputc : 파일에서 문자 출력
 	* fputs : 파일에서 문자열 출력
-	
-	* fscanf : 파일에서 데이터 입력(쓰기);
-	* feof : 파일의 문제가 있는지 없는지 확인
+
+	* fscanf : 파일에 데이터 입력(쓰기)
+	* feof : 파일의 문제가 있는지 없는지 확인.
 	*/
-	
 	FILE* pFile = fopen("Test.txt", "r");
 
 	char Buffer[1024];
@@ -147,17 +151,16 @@ char* ReadAll(char* _FileName)
 
 	char* str = (char*)malloc(strlen(Buffer) + 1);
 	strcpy(str, Buffer);
-	
+
 	return str;
 }
 
-// ** 데이터 전체 불러오기
+// ** 데이터 전체 불러오기.
 void ReadLine(char* _FileName, char** _Tex)
 {
 	FILE* pFile = fopen("Test.txt", "rt");
 
 	int size = 0;
-
 	while (!feof(pFile))
 	{
 		// ** 데이터 한줄씩 불러오기
@@ -172,10 +175,16 @@ void ReadLine(char* _FileName, char** _Tex)
 	fclose(pFile);
 }
 
+
+
+
 // ** 오브젝트 생성 함수.
 Object* CreateObject(int _x, int _y, char* _Texture)
 {
 	// ** Object를 동적으로 생성한다.
+
+	//Object* pObj = nullptr;
+
 	Object* pObj = (Object*)malloc(sizeof(Object));
 
 	// ** 좌표를 셋팅
@@ -234,46 +243,47 @@ void InputKey()
 	KeyState = 0;
 
 	if (GetAsyncKeyState(VK_UP))
-		KeyState |= KEY_UP;
+		KeyState |= KEYID_UP;
 
 	if (GetAsyncKeyState(VK_DOWN))
-		KeyState |= KEY_DOWN;
+		KeyState |= KEYID_DOWN;
 
 	if (GetAsyncKeyState(VK_LEFT))
-		KeyState |= KEY_LEFT;
+		KeyState |= KEYID_LEFT;
 
-	if (GetAsyncKeyState(VK_RIGHT)) 
-		KeyState |= KEY_RIGHT;
+	if (GetAsyncKeyState(VK_RIGHT))
+		KeyState |= KEYID_RIGHT;
 
 	if (GetAsyncKeyState(VK_RETURN))
-		KeyState |= KEY_ESCAPE;
+		KeyState |= KEYID_ESCAPE;
 
 	if (GetAsyncKeyState(VK_ESCAPE))
-		KeyState |= KEY_ENTER;
+		KeyState |= KEYID_ENTER;
 
 	if (GetAsyncKeyState(VK_SPACE))
-		KeyState |= KEY_SPACE;
+		KeyState |= KEYID_SPACE;
 
 	if (GetAsyncKeyState(VK_SHIFT))
-		KeyState |= KEY_SHIFT;
+		KeyState |= KEYID_SHIFT;
 }
 
 void LogoInitialize()
 {
 	//LogoTex = ReadAll((char*)"Test.txt");
-	for (int i = 0; i < 9; ++i)
+
+	for (int i = 0; i < 23; ++i)
 		ReadLine((char*)"Test.txt", LogoTex);
 }
 
 void LogoProgress()
 {
-	if (KeyState & KEY_ESCAPE)
+	if (KeyState & KEYID_ESCAPE)
 		SceneState = SceneID::MENU;
 }
 
 void LogoRender(char* _str[], int _size, int _x, int _y)
 {
-	for (int i = 0; i < _size; i++)
+	for (int i = 0; i < _size; ++i)
 	{
 		SetCursorPosition(_x, _y + i);
 		printf("%s", _str[i]);
@@ -283,34 +293,33 @@ void LogoRender(char* _str[], int _size, int _x, int _y)
 
 void MenuProgress()
 {
-	if (KeyState & KEY_ENTER)
+	if (KeyState & KEYID_ENTER)
 		SceneState = SceneID::STAGE;
 }
 
 void MenuRender(char* _str[], int _size, int _x, int _y)
 {
-	for (int i = 0; i < _size; i++)
+	for (int i = 0; i < _size; ++i)
 	{
 		SetCursorPosition(_x, _y + i);
 		printf("%s", _str[i]);
 	}
 }
 
-Object* Bullet[128];
-bool Check[128];
+
 
 void StageInitialize()
 {
 	for (int i = 0; i < 128; ++i)
 	{
-		Bullet[i] = CreateObject(0, 0, (i % 2) == 0 ? (char*)"*" : (char*)".");
-		Check[i] = false;
+		//Bullet[i] = CreateObject(0, 0, (i % 2) == 0 ? (char*)"*" : (char*)".");
+		//Check[i] = false;
 	}
 }
 
-void StageProgress(Object* _Player, Object* _Enemy)
+void StageProgress(Object* _Player, Object* _Enemy, Object* _pBullet)
 {
-	if (KeyState & KEY_UP)
+	if (KeyState & KEYID_UP)
 	{
 		if (_Player->Position.y > 0)
 			_Player->Position.y--;
@@ -318,7 +327,7 @@ void StageProgress(Object* _Player, Object* _Enemy)
 		_Player->Texture = (char*)"△";
 	}
 
-	if (KeyState & KEY_DOWN)
+	if (KeyState & KEYID_DOWN)
 	{
 		if (_Player->Position.y < 39)
 			_Player->Position.y++;
@@ -326,7 +335,7 @@ void StageProgress(Object* _Player, Object* _Enemy)
 		_Player->Texture = (char*)"▽";
 	}
 
-	if (KeyState & KEY_LEFT)
+	if (KeyState & KEYID_LEFT)
 	{
 		if (_Player->Position.x > 0)
 			_Player->Position.x--;
@@ -334,44 +343,45 @@ void StageProgress(Object* _Player, Object* _Enemy)
 		_Player->Texture = (char*)"◁";
 	}
 
-	if (KeyState & KEY_RIGHT)
+	if (KeyState & KEYID_RIGHT)
 	{
 		if (_Player->Position.x < 118)
 			_Player->Position.x++;
 
 		_Player->Texture = (char*)"▷";
 	}
-
-	if (KeyState & KEY_SPACE)
+	
+	if (KeyState & KEYID_SPACE)
 	{
 		for (int i = 0; i < 128; ++i)
 		{
 			if (!Check[i])
 			{
-				Bullet[i]->Position.x = 118;
-				Bullet[i]->Position.y = rand() % 40;
-				Check[i] = true;
+				_pBullet[i] = 
+				_pBullet[i].Position.x = 118;
+				_pBullet[i].Position.y = rand() % 40;
 				break;
 			}
 		}
 	}
 
-
 	for (int i = 0; i < 128; ++i)
 	{
-		if (Check[i])
-		{
-			Bullet[i]->Position.x -= 1;
 
-			if (Collision(_Player, Bullet[i]))
+			_pBullet[i].Position.x -= 1;
+
+			if (_Player->Position.x + _Player->Scale.x > )
 			{
-				SetCursorPosition(120 >> 1, 1);
-				printf("Bullet 충돌 입니다.");
+				//SetCursorPosition(120 >> 1, 1);
+				//printf("Bullet 충돌 입니다.");
 			}
 		}
 
-		if (Bullet[i]->Position.x <= 1)
-			Check[i] = false;
+	if (_pBullet[i]->Position.x <= 1)
+	{
+
+	}
+			
 	}
 
 	if (Collision(_Player, _Enemy))
@@ -384,18 +394,17 @@ void StageProgress(Object* _Player, Object* _Enemy)
 		SceneState = SceneID::EXIT;
 }
 
-void StageRender(Object* _Player, Object* _Enemy)
+void StageRender(Object* _Player, Object* _Enemy, Object* _pBullet)
 {
 	SetCursorPosition(_Player->Position.x, _Player->Position.y);
 	printf("%s", _Player->Texture);
 
 	for (int i = 0; i < 128; ++i)
 	{
-		if (Check[i])
-		{
-			SetCursorPosition(Bullet[i]->Position.x, Bullet[i]->Position.y);
-			printf("%s", Bullet[i]->Texture);
-		}
+
+		SetCursorPosition(_pBullet[i]->Position.x, _pBullet[i]->Position.y);
+		printf("%s", _pBullet[i]->Texture);
+	
 	}
 
 	SetCursorPosition(_Enemy->Position.x, _Enemy->Position.y);
