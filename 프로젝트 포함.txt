@@ -1,0 +1,15 @@
+프로젝트 속성
+
+VC++ 디렉터리
+- 포함 디렉터리 : $(ProjectDir)../../Common/
+
+C/C++
+- 추가 포함 디렉터리 : 
+Headers.h
+Constant.h
+Enum.h
+Struct.h
+
+링커
+- 추가 라이브러리 디렉터리 : ../../Common/
+

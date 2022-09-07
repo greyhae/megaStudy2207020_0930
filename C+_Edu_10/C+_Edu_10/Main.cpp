@@ -1,4 +1,10 @@
-#include "Headers.h"
+#include "../../Common/Headers.h"
+
+
+
+
+
+
 
 // ** 키 입력 함수 수정.
 // ** 파일 입출력.
@@ -29,8 +35,6 @@ SceneID SceneState = SceneID::LOGO;
 // ** 어떤 키를 입력 받았는지 확인하기 위한 변수.
 static DWORD KeyState = 0;
 
-
-
 void SetScene(Object* _pPlayer, Object* _pEnemy, Object* _pBullet);
 char* ReadAll(char* _FileName);
 void ReadLine(char* _FileName, char** _LogoTex);
@@ -39,6 +43,7 @@ Object* CreateObject(int _x, int _y, char* _Texture);
 void SetCursorPosition(int _x, int _y);
 void ShowCursor(bool _b);
 void InputKey();
+
 
 void LogoInitialize();
 void LogoProgress();
@@ -52,15 +57,21 @@ void StageProgress(Object* _Player, Object* _Enemy, Object* _pBullet);
 void StageRender(Object* _Player, Object* _Enemy, Object* _pBullet);
 bool Collision(Object* _Temp, Object* _Dest);
 
+
+
 bool Check[128];
 
 int main(void)
 {
-	//BulletInitialize 함수로
 	Object* Bullet = (Object*)malloc(sizeof(Object) * 128);
-	//Bullet = nullptr;
+	
 	for (int i = 0; i < 128; ++i)
+	{
 		Check[i] = false;
+		Bullet[i].Position.x = 10;
+	}
+
+	/*
 	ShowCursor(false);
 
 	ULONGLONG Time = GetTickCount64();
@@ -86,9 +97,7 @@ int main(void)
 			SetScene(pPlayer, Enemy, Bullet);
 		}
 	}
-
-
-
+	*/
 
 	return 0;
 }
