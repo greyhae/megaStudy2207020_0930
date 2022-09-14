@@ -5,6 +5,7 @@ struct Node
 {
 	int Value;
 	Node* Next;
+	Node* Front;
 };
 
 Node* Begin;
@@ -14,20 +15,23 @@ int size = 0;
 void erase(int _where);
 void Testcase2(Node* _List, const int _Value);
 void Testcase1(Node* _List, const int _Value);
-void AddData(int _Value);
-int Pop();
+void push_back(int _Value);
+int Pop_back();
 void Output();
+void Clear();
 
 int main(void)
 {
 	Node* List = (Node*)malloc(sizeof(Node));
 	Begin = List;
 	End = List;
+	List->Front = nullptr;
+	List->Next = nullptr;
 	List->Value = 1;
 	size = 1;
 
 	for (int i = 0; i < 51; ++i)
-		AddData(i + 1);
+		push_back(i + 1);
 
 	//AddData(20);
 	///AddData(30);
@@ -36,9 +40,11 @@ int main(void)
 	//Testcase1(List, 60);
 	//Testcase2(List, 70);
 
-	erase(50);
-	erase(1);
-	erase(24);
+	//erase(50);
+	//erase(1);
+	//erase(24);
+
+	//Clear();
 	Output();
 
 	//printf("\n<마지막 데이터를 삭제합니다.\n");
@@ -71,12 +77,12 @@ void erase(int _where)
 
 		free(left);
 	}
-		
+
 	// ** 마지막 노드는 다음 노드가 없기 때문에 이전 노드와 연결할 수 없다.(연결할 노드가 없다.)
 	// ** 마지막 노드는 end가 된다.
 	else if (_where == size)
 	{
-		Pop();
+		Pop_back();
 	}
 	// ** 중간에 있는 노드들은 _where로 카운팅을 해서
 	else
@@ -159,42 +165,29 @@ void Testcase1(Node* _List, const int _Value)
 		Testcase1(_List->Next, _Value);
 }
 
-void AddData(int _Value)
+void push_back(int _Value)
 {
 	End->Next = (Node*)malloc(sizeof(Node));
+	End->Next->Front = End;
 	End = End->Next;
+	
 
 	End->Next = nullptr;
 	End->Value = _Value;
 	++size;
 }
 
-int Pop()
+int Pop_back()
 {
 	// ** 첫번째 위치의 노드를 받아온다.
 	int Value = End->Value;
 
-	// ** 처음 노드를 지정
-	Node* pList = Begin;
+	// ** 마지막 노드를 주고
+	Node* pList = End;
 
-	// ** 리스트의 전체 사이즈만큼 반복
-	for (int i = 0; i < size; ++i)
-	{
-		// ** 현재 노드의 다음 노드와 같은 값의 노드를 찾는다.
-		if (pList->Next->Value == Value)
-		{
-			// ** 현재 노드는 마지막 노드의 이전 노드이므로
-			End = pList;
+	// ** End 노드의 이전 노드를 End 노드로 셋팅
+	End = End->Front;
 
-			// ** 현재 노드를 마지막 노드로 셋팅
-			pList = pList->Next;
-
-			// ** 반복문을 탈출
-			break;
-		}
-		// ** if 문에서 마지막 노드를 찾지 못했다면 다음 노드로 이동
-		pList = pList->Next;
-	}
 
 	// ** 반복문이 종료되었다면 현재 노드는 마지막 노드이므로 삭제해준다.
 	free(pList);
@@ -211,6 +204,18 @@ int Pop()
 
 void Output() {
 
+	Node* NodeList = End;
+
+	printf("<전체 데이터를 출력합니다.>\n");
+
+	while (NodeList != nullptr)
+	{
+		printf("%d\n", NodeList->Value);
+		NodeList = NodeList->Front;
+	}
+	printf("\n");
+
+	/*
 	Node* NodeList = Begin;
 
 	printf("<전체 데이터를 출력합니다.>\n");
@@ -221,4 +226,26 @@ void Output() {
 		NodeList = NodeList->Next;
 	}
 	printf("\n");
+	*/
+}
+
+void Clear()
+{
+	// ** 새롭게 생성하고 Begin을 준다.
+	Node* NodeList = Begin;
+
+	// ** NodeList가 nullptr이 아니라면 반복함
+	while (NodeList != nullptr)
+	{
+		// ** 이전 정보를 이미 NodeList에 넘겨 주었기 때문에 begin은 다음 노드를 가르키도록 해준다.
+		Begin = Begin->Next;
+
+		// ** 이전 노드의 정보를 지운다.
+		free(NodeList);
+		NodeList == nullptr;
+
+		// ** 다시 NodeList를 Begin에 넘겨준다.
+		NodeList = Begin;
+	}
+;
 }
