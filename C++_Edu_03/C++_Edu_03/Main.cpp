@@ -75,12 +75,16 @@ int main(void)
 		cout << i << endl;
 	}
 	
+	Object* pObj = new Object[100];
+	Object* pObj2 = pObj;
 
 	
 	//delete Obj;
 
-	// ** 포인터를 배열처럼 또는 배열을 포인터처럼 사용할 수 있지만, 실제 삭제할 때는 자료형에 따라 배열이 터지거나 하는 문제가 발생할 수 있으므로, 자료형에 맞게 처리해줘야 한다.
-	delete[] Obj;
+	// ** 표현식에 배열 []를 사용했으면 삭제할 때도 사용해야한다.
+	delete[] pObj;
+
+	// ** 데이터 공간에는
 
 	// ** 포인터의 개념
 	/*
