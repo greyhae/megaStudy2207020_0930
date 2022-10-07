@@ -13,5 +13,36 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\Parent">
+      <UniqueIdentifier>{95232a95-c63a-4a1c-a94f-195eb885d271}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Parent\Child">
+      <UniqueIdentifier>{af2638d9-1e76-4f9e-94a7-5ade9239ae05}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Parent.cpp">
+      <Filter>소스 파일\Parent</Filter>
+    </ClCompile>
+    <ClCompile Include="Child.cpp">
+      <Filter>소스 파일\Parent\Child</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Header.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Parent.h">
+      <Filter>소스 파일\Parent</Filter>
+    </ClInclude>
+    <ClInclude Include="Child.h">
+      <Filter>소스 파일\Parent\Child</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

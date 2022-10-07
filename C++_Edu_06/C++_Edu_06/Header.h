@@ -4,3 +4,5 @@
 #include <Windows.h>
 
 using namespace std;
+
+#include "Struct.h"
