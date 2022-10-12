@@ -1,24 +1,24 @@
 #include "Enemy.h"
 
-void Player::Initialize()
+void Enemy::Initialize()
 {
-	cout << "Enemy : Initialize" << endl;
+	cout << "Enemy::Initialize" << endl;
 }
 
-void Player::Progress()
+void Enemy::Progress()
 {
-	cout << "Enemy : Progress" << endl;
-}
-
-
-void Player::Render()
-{
-	cout << "Enemy : Render" << endl;
+	cout << "Enemy::Progress" << endl;
 }
 
 
-void Player::Release()
+void Enemy::Render()
 {
-	cout << "Enemy : Release" << endl;
+	cout << "Enemy::Render" << endl;
+}
+
+
+void Enemy::Release()
+{
+	cout << "Enemy::Release" << endl;
 }
 

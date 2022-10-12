@@ -4,19 +4,24 @@
 #include "Player.h"
 #include "Enemy.h"
 
-MainUpdate::MainUpadate()
+MainUpdate::MainUpdate()
 {
 
 }
 
-MainUpdate::~MainUpadate()
+MainUpdate::~MainUpdate()
 {
-
+	Release();
 }
 
 void MainUpdate::Initialize()
 {
+	// ** 대입연산자는 후순위
+	ObjectList[0] = SingletonManager::GetInstance()->CreatePlayer();
+	ObjectList[0]-> Initialize();
 
+	ObjectList[1] = SingletonManager::GetInstance()->CreateEnemy();
+	ObjectList[1]->Initialize();
 }
 void MainUpdate::Progress()
 {
@@ -28,11 +33,11 @@ void MainUpdate::Render()
 	for (Object* Element : ObjectList)
 		Element->Render();
 }
-void MainUpdate::Initialize()
+void MainUpdate::Release()
 {
 	for (Object* Element : ObjectList)
 	{
-		deleate Element;
+		delete Element;
 		Element = nullptr;
 	}
 		

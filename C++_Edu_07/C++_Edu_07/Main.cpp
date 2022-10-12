@@ -1,11 +1,34 @@
-
 #include "MainUpdate.h"
 
-// ** 按眉 包府 
+class Test
+{
+public:
+	static int Number;
+};
 
+int Test::Number;
+
+// ** 按眉 包府 努贰胶
 int main(void)
 {
+	/*
+	// ** static
+	Test t1;
+	t1.Number = 10;
+
+	Test t2;
+	t2.Number = 20;
+
+	Test t3;
+	t3.Number = 1000;
+
+	cout << t1.Number << endl;
+	cout << Test::Number << endl;
+	*/
+
+
 	MainUpdate Main;
+	Main.Initialize();
 
 	ULONGLONG Time = GetTickCount64();
 
@@ -18,9 +41,9 @@ int main(void)
 			Main.Progress();
 			Main.Release();
 
-			if (GetAsyncKeyState("Q")
+			if (GetAsyncKeyState('Q'))
 			{
-
+				break;
 			}
 		}
 	}

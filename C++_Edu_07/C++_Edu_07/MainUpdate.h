@@ -1,15 +1,12 @@
 #pragma once
-#include "MainUpdate.h"
-
-
+#include "Headers.h"
 
 class Object;
-
-
 class MainUpdate
 {
 private:
 	// ** 변수 생성
+	Object* ObjectList[2];
 public:
 	// ** 초기화
 	void Initialize();
@@ -22,4 +19,8 @@ public:
 
 	// ** 삭제
 	void Release();
+
+public:
+	MainUpdate();
+	~MainUpdate();
 };
