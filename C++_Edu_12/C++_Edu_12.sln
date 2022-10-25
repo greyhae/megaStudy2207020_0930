@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32630.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "C++_Edu_12", "C++_Edu_12\C++_Edu_12.vcxproj", "{6AC562CF-6DFD-4BA0-BF6F-C8F483956A5C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6AC562CF-6DFD-4BA0-BF6F-C8F483956A5C}.Debug|x64.ActiveCfg = Debug|x64
+		{6AC562CF-6DFD-4BA0-BF6F-C8F483956A5C}.Debug|x64.Build.0 = Debug|x64
+		{6AC562CF-6DFD-4BA0-BF6F-C8F483956A5C}.Debug|x86.ActiveCfg = Debug|Win32
+		{6AC562CF-6DFD-4BA0-BF6F-C8F483956A5C}.Debug|x86.Build.0 = Debug|Win32
+		{6AC562CF-6DFD-4BA0-BF6F-C8F483956A5C}.Release|x64.ActiveCfg = Release|x64
+		{6AC562CF-6DFD-4BA0-BF6F-C8F483956A5C}.Release|x64.Build.0 = Release|x64
+		{6AC562CF-6DFD-4BA0-BF6F-C8F483956A5C}.Release|x86.ActiveCfg = Release|Win32
+		{6AC562CF-6DFD-4BA0-BF6F-C8F483956A5C}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AD9AD481-B23C-491C-9866-2C940E3CD681}
+	EndGlobalSection
+EndGlobal
