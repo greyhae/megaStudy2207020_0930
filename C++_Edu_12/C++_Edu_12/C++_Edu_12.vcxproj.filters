@@ -72,9 +72,6 @@
     <ClInclude Include="Menu.h">
       <Filter>소스 파일\01. Scene\Menu</Filter>
     </ClInclude>
-    <ClInclude Include="Stage.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="ObjectManager.h">
       <Filter>소스 파일\99. Manager\ObjectManager</Filter>
     </ClInclude>
@@ -89,6 +86,9 @@
     </ClInclude>
     <ClInclude Include="Struct.h">
       <Filter>헤더 파일\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>소스 파일\01. Scene\Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -113,9 +113,6 @@
     <ClCompile Include="Menu.cpp">
       <Filter>소스 파일\01. Scene\Menu</Filter>
     </ClCompile>
-    <ClCompile Include="Stage.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="ObjectManager.cpp">
       <Filter>소스 파일\99. Manager\ObjectManager</Filter>
     </ClCompile>
@@ -124,6 +121,9 @@
     </ClCompile>
     <ClCompile Include="CursorManager.cpp">
       <Filter>소스 파일\99. Manager\CursorManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>소스 파일\01. Scene\Stage</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

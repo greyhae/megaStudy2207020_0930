@@ -1,5 +1,5 @@
 #include "Headers.h"
-#include  "MainUpdate.h"
+#include "MainUpdate.h"
 
 int main(void)
 {
@@ -18,6 +18,5 @@ int main(void)
 			Main.Render();
 		}
 	}
-
-	return;
+	return 0;
 }
