@@ -9,6 +9,12 @@ public:
 	int Kor;
 	int Eng;
 	int Math;
+
+public:
+	~Object()
+	{
+		cout << "소멸" << endl;
+	}
 };
 
 Object* CreateObject(int _kor, int _eng, int _math)
@@ -30,7 +36,7 @@ int main(void)
 	
 	vector<Object*> Objects;
 
-	// 방법 1
+	// 1
 	for (int i = 0; i < 3; ++i)
 		Objects.push_back(
 			CreateObject(
@@ -39,7 +45,7 @@ int main(void)
 				i * 10 + 10 + 2));
 
 	/*
-	// 방법 2
+	// 2
 	for (int i = 0; i < 3; ++i)
 	{
 		Object* pObj = new Object;
@@ -71,24 +77,50 @@ int main(void)
 
 	{
 		// ** (시작점) 첫번째 원소를 가르키는 반복자
+		/*
 		iter = Objects.begin();
+
+		cout << "첫번째 원소의 국어 점수" << (*iter)->Kor << endl;
+		cout << "첫번째 원소의 영어 점수" << (*iter)->Eng << endl;
+		cout << "첫번째 원소의 수학 점수" << (*iter)->Math << endl << endl;
+		*/
 
 	}
 
 	{
 		// ** 마지막을 가르키는 반복자
+		/*
 		iter = Objects.end();
 
 		if (iter == Objects.end())
 			cout << "list의 마지막입니다." << endl;
+		*/
 	}
 
 	{
 		for (vector<Object*>::iterator iter = Objects.begin(); iter != Objects.end(); ++iter)
 		{
-			cout << "첫번째 원소의 국어 점수" << (*iter)->Kor << endl;
-			cout << "첫번째 원소의 영어 점수" << (*iter)->Eng << endl;
-			cout << "첫번째 원소의 수학 점수" << (*iter)->Math << endl << endl;
+			cout << "원소의 국어 점수" << (*iter)->Kor << endl;
+			cout << "원소의 영어 점수" << (*iter)->Eng << endl;
+			cout << "원소의 수학 점수" << (*iter)->Math << endl << endl;
+		}
+
+
+		cout << endl << "[array]" << endl;
+		for (int i = 0; i < Objects.size(); ++i)
+		{
+			cout << "원소의 국어 점수" << Objects.at(i)->Kor << endl;
+			cout << "원소의 영어 점수" << Objects.at(i)->Eng << endl;
+			cout << "원원소의 수학 점수" << Objects.at(i)->Math << endl << endl;
+		}
+
+
+		cout << endl << "[at]" << endl;
+		for (int i = 0; i < Objects.size(); ++i)
+		{
+			cout << "원하는 위치에 원하는 값 추가 : 원소의 국어 점수" << Objects.at(i)->Kor << endl;
+			cout << "원하는 위치에 원하는 값 추가 : 원소의 영어 점수" << Objects.at(i)->Eng << endl;
+			cout << "원하는 위치에 원하는 값 추가 : 원소의 수학 점수" << Objects.at(i)->Math << endl << endl;
 		}
 
 	}
