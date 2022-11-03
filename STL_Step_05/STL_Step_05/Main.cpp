@@ -1,7 +1,6 @@
 #include <iostream>
 #include <Windows.h>
 #include <map>
-#include <vector>
 #include <list>
 
 using namespace std;
@@ -15,6 +14,7 @@ struct Info
 	Info() : Kor(0), Eng(0), Math(0) {}
 	Info(int _Kor, int _Eng, int _Math) : Kor(_Kor), Eng(_Eng), Math(_Math) {}
 };
+
 class Object
 {
 protected:
@@ -26,12 +26,12 @@ public:
 	int GetKey() { return key; }
 	void Render()
 	{
-		cout << "국어점수 : " << info.Kor
-			<< "영어점수 : " << info.Eng
+		cout << "국어점수 : " << info.Kor << endl
+			<< "영어점수 : " << info.Eng << endl
 			<< "수학점수 : " << info.Math << endl << endl;
 	}
 public:
-	Object() : key(0){}
+	Object() : key(0) {}
 	Object(Info _info) : info(_info), key(0) {}
 
 };
@@ -39,6 +39,7 @@ public:
 // ** Teacher
 class Teacher : public Object
 {
+public:
 	void Initialize()
 	{
 		key = 1;
@@ -63,29 +64,53 @@ public:
 
 
 
-class ObjcetManager
+class ObjectManager
 {
 private:
-	static ObjcetManager* Instance;
+	static ObjectManager* Instance;
 public:
-	static ObjcetManager* GetInstance()
+	static ObjectManager* GetInstance()
 	{
 		if (Instance == nullptr)
-			Instance = new ObjcetManager;
+			Instance = new ObjectManager;
 		return Instance;
 	}
 private:
 	map<int, list<Object*>> Objects;
 public:
-	
+	void AddObject(Object*);
+	void Render();
 private:
-	ObjcetManager();
+	ObjectManager() {};
 	
 public:
-	~ObjcetManager();
+	~ObjectManager() {};
 };
 
-void AddObject(Object*);
+void ObjectManager::AddObject(Object* _pObj)
+{
+	map<int, list<Object*>>::iterator iter = Objects.find(_pObj->GetKey());
+
+	if (iter == Objects.end())
+	{
+		list<Object*> temp;
+		temp.push_back(_pObj);
+
+		Objects.insert(make_pair(_pObj->GetKey(), temp));
+	}
+	else
+			iter->second.push_back(_pObj);
+}
+
+void ObjectManager::Render()
+{
+	for (auto iter = Objects.begin(); iter != Objects.end(); ++iter)
+	{
+		cout << iter->first << endl;
+		for (auto iter2 = iter->second.begin(); iter2 != iter->second.end(); ++iter2)
+			(*iter2)->Render();
+	}
+}
 
 int main(void)
 {
@@ -107,34 +132,13 @@ int main(void)
 
 
 		// ** 오브젝트 추가
-		ObjcetManager::GetInstance()->AddObject(pObj);
+		ObjectManager::GetInstance()->AddObject(pObj);
 
 
 	}
 
 	// ** 출력
-	ObjcetManager::GetInstance()->Render();
-
-	for (auto iter = Objects.begin(); iter != Objects.end(); ++iter)
-	{
-		for (auto iter2 = iter->second.begin(); iter2 != Objects.end(); ++iter2)
-		{
-
-		}
-	}
+	ObjectManager::GetInstance()->Render();
 
 	return 0;
-}
-
-void AddObject(Object* _pObj)
-{
-	map<int, list<Object*>>::iterator iter = Objects.find(_pObj->GetKey());
-
-	if (iter == Objedts.end())
-	{
-		list<Object*> temp;
-		temp.push_back(_pObj);
-
-		Objects.insert(make_pair(_pObj->GetKey())
-	}
 }
