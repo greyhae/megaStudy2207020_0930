@@ -19,8 +19,9 @@ private:
 	map<string, list<Object*>> EnableList;
 	map<string, list<Object*>> DisableList;
 public:
-	list<Object*>* findMaplist(string key, map<string, list<Object*>*>* mapList);
-	void addMapObject(Object* pObj, map<string, list<Object*>*>* mapList);
+	list<Object*>* GetDisableObjectList(string key);
+	void AddObjectList(Object* pObj, ListType type = ListType::Enable);
+	void CreateObjectList();
 	void Update();
 	void Render();
 private:

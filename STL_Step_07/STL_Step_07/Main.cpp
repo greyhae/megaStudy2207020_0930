@@ -1,4 +1,5 @@
 #include "Headers.h"
+#include "ObjectPool.h"
 #include "Alatreon.h"
 
 // ** DesignPattern
@@ -6,6 +7,33 @@
 
 int main(void)
 {
+	list<Object*>* objectList = ObjectPool::GetInstance()->GetDisableObjectList("Alatreon");
+
+	if (objectList == nullptr)
+	{
+		// ** 리스트 추가
+		cout << "objectList == nullptr" << endl;
+
+		Object* pObj = new Alatreon();
+		pObj->Start();
+
+		ObjectPool::GetInstance()->AddObjectList(pObj);
+	}
+	else
+	{
+		// ** DisableList에서 EnableList로 switching
+		if (!objectList->empty())
+		{
+			// ** disable list -> enable list 
+			// =>>> 만들어볼 것!!!!
+		}
+		else
+		{
+			// ** create
+			ObjectPool::GetInstance()->CreateObjectList();
+		}
+	}
+
 	/*
 	while(true)
 	{
