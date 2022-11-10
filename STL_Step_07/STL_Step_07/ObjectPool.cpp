@@ -28,12 +28,12 @@ list<Object*>* ObjectPool::GetDisableObjectList(string key)
 
 void ObjectPool::AddObjectList(Object* pObj, ListType type)
 {
-	map<string, list<Object*>*>* mapList = nullptr;
+	map<string, list<Object*>> mapList;
 
 	if (type == ListType::Enable)
-		mapList = &EnableList;
+		mapList = EnableList;
 	else
-		mapList = &DisableList;
+		mapList = DisableList;
 
 	
 	// ** 오브젝트가 담겨야 할 공간이 이미 존재하느지 탐색
@@ -42,12 +42,12 @@ void ObjectPool::AddObjectList(Object* pObj, ListType type)
 	// ** 존재하지 않는다면 새로운 공간을 확보하고 추가한다.
 	if (iter == EnableList.end())
 	{
-		list<Object*>* temp = new list<Object*>();
-		temp->push_back(pObj);
+		list<Object*> temp = new list<Object*>();
+		temp.push_back(pObj);
 		EnableList.insert(make_pair(pObj->GetKey(), temp));
 	}
 	else // ** 존대한다면 그 해당 위치에 객체를 넣는다.
-		iter->second->push_back(pObj);
+		iter->second.push_back(pObj);
 }
 
 void ObjectPool::CreateObjectList()
@@ -76,7 +76,7 @@ void ObjectPool::Update()
 			if (result == 1)
 			{
 				AddObjectList();
-				iter2 = iter->second->erase(iter2);
+				iter2 = iter->second.erase(iter2);
 			}
 		}
 	}

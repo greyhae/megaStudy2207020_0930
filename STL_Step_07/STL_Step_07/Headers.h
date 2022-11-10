@@ -9,6 +9,7 @@
 
 using namespace std;
 
+#include "Struct.h"
 
 enum class ListType {
 
