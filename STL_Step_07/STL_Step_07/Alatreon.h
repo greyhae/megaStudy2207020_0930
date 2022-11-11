@@ -5,7 +5,7 @@ class Alatreon : public Object
 {
 
 public:
-	virtual Object* Initialize(const INFO& _Info)override);
+	virtual Object* Initialize()override;
 	virtual void Start()override;
 	virtual int Update()override;
 	virtual void Render()override;
@@ -17,7 +17,7 @@ public:
 	}
 public:
 	Alatreon();
-	Alatreon(INFO _Info) : Info(_Info);
+	Alatreon(INFO _Info) : Object(_Info) {};
 	virtual ~Alatreon();
 };
 

@@ -11,7 +11,7 @@ public:
 	string GetKey() { return key; }
 	void SetKey(string key) { key = key; }
 public:
-	virtual Object* Initialize(const INFO& _Info)PURE;
+	virtual Object* Initialize()PURE;
 	virtual void Start()PURE;
 	virtual int Update()PURE;
 	virtual void Render()PURE;

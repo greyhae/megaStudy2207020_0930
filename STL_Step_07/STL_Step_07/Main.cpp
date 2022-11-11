@@ -14,7 +14,13 @@ int main(void)
 		pObj->Start();
 		pObj->SetKey("Enemy");
 
-		if(Prototype::GetInstance()->AddProtoTypeObject(pObj);
+		if (Prototype::GetInstance()->AddProtoTypeObject(pObj))
+		{
+			//continue;
+			//break;
+
+			//return;
+		}
 	}
 	list<Object*>* objectList = ObjectPool::GetInstance()->GetDisableObjectList("Alatreon");
 

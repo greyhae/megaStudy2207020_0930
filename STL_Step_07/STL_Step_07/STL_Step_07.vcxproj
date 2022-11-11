@@ -147,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Alatreon.h" />
+    <ClInclude Include="Enum.h" />
     <ClInclude Include="Headers.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectPool.h" />

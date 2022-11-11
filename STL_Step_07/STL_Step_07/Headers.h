@@ -10,9 +10,4 @@
 using namespace std;
 
 #include "Struct.h"
-
-enum class ListType {
-
-	Enable,
-	Disable,
-};
+#include "Enum.h"
