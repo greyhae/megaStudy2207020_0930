@@ -13,18 +13,120 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\00. MainUpdate">
+      <UniqueIdentifier>{15a7f87b-7a91-44f2-bb81-f802396be8ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Manager">
+      <UniqueIdentifier>{8cd56e3e-8886-4e8d-9cda-6e880f362a8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Scene">
+      <UniqueIdentifier>{8c0ba1ee-fe54-4625-a44e-179b87ee5958}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Scene\Logo">
+      <UniqueIdentifier>{4061a86b-863f-4d06-81e0-6596b5dac2b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Scene\Menu">
+      <UniqueIdentifier>{088427df-8a01-4b1d-82eb-8e998f121074}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Scene\Stage">
+      <UniqueIdentifier>{63a25f11-0ca3-4862-8d19-27c7eb23bd4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object">
+      <UniqueIdentifier>{c4769fa0-3e04-4306-a1f5-6de04b50ad43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Player">
+      <UniqueIdentifier>{c0ac4a36-8299-4a12-8d4c-22c7e4980150}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Include">
+      <UniqueIdentifier>{ca59d3a0-58a4-4322-ab45-c41715a3ddf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Manager\ObjectManger">
+      <UniqueIdentifier>{a0c8e1d3-1fbb-4e4a-aa58-090d7a8f05a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Manager\SceneManager">
+      <UniqueIdentifier>{c7d0ca4d-aa62-4d6f-856a-2cbb53f27d8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Manager\InputManager">
+      <UniqueIdentifier>{c1d05327-0e29-4f63-a7ee-66772ef9e158}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MainUpdate.cpp">
+      <Filter>소스 파일\00. MainUpdate</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>소스 파일\01. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Logo.cpp">
+      <Filter>소스 파일\01. Scene\Logo</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>소스 파일\01. Scene\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>소스 파일\01. Scene\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>소스 파일\02. Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>소스 파일\02. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>소스 파일\Manager\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>소스 파일\Manager\ObjectManger</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>소스 파일\Manager\InputManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="MainUpdate.h">
+      <Filter>소스 파일\00. MainUpdate</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>소스 파일\01. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Logo.h">
+      <Filter>소스 파일\01. Scene\Logo</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>소스 파일\01. Scene\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>소스 파일\01. Scene\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>소스 파일\02. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>소스 파일\02. Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>헤더 파일\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum.h">
+      <Filter>헤더 파일\Include</Filter>
+    </ClInclude>
     <ClInclude Include="Struct.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>소스 파일\Manager\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>소스 파일\Manager\ObjectManger</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>소스 파일\Manager\InputManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

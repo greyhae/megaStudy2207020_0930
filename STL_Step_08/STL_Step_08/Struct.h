@@ -14,3 +14,10 @@ struct Vector3
 	Vector3 operator*(float f) {return Vector3(x * f, y * f, z * f);}
 	Vector3 operator/(float f) {return Vector3(x / f, y / f, z / f);}
 };
+
+struct Transform
+{
+	Vector3 Position;
+	Vector3 Scale;
+	Vector3 Direction;
+};
