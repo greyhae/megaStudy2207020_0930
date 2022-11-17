@@ -128,5 +128,8 @@
     <ClInclude Include="InputManager.h">
       <Filter>소스 파일\Manager\InputManager</Filter>
     </ClInclude>
+    <ClInclude Include="DataManager.h">
+      <Filter>소스 파일\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

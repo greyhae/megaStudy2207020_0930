@@ -1,5 +1,6 @@
 #include "Headers.h"
 #include "MainUpdate.h"
+#include "DataManager.h"
 
 int main(void)
 {
@@ -18,11 +19,23 @@ int main(void)
 
 	ULONGLONG Time = GetTickCount64();
 
+	/*
+	DataManager::saveData("images\\background.png");
+	DataManager::saveData("images\\logo.png");
+	DataManager::saveData("images\\menu.png");
+	DataManager::saveData("images\\stage.png");
+	DataManager::saveData("images\\player.png");
+	DataManager::saveData("images\\enemy.png");
+	DataManager::saveData("images\\bullet.png");
+	*/
+
 	while (true)
 	{
 		if (Time < GetTickCount64())
 		{
 			system("cls");
+
+			//DataManager::loadData();
 
 			Main.Update();
 			Main.Render();

@@ -1,6 +1,7 @@
 #pragma once
 #include "Scene.h"
 
+class Object;
 class Stage : public Scene
 {
 	virtual void Start()override;

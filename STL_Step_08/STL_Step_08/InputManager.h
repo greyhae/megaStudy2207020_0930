@@ -13,6 +13,11 @@ public:
 		return Instance;
 	}
 private:
+	DWORD dwKey;
+public:
+	DWORD GetKey() { return dwKey; }
+	void InputKey();
+private:
 	InputManager();
 public:
 	~InputManager();

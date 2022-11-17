@@ -19,7 +19,10 @@ void Logo::Start()
 void Logo::Update()
 {
 	cout << "Logo" << endl;
-	if(GetAsyncKeyState('A')
+	if (GetAsyncKeyState('A'))
+	{
+
+	}
 }
 
 void Logo::Render()

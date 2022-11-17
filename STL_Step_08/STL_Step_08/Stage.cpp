@@ -1,13 +1,29 @@
 #include "Stage.h"
+#include "SceneManager.h"
+#include "Player.h"
 
-void Stage::Start()
+
+Stage::Stage()
 {
 
 }
 
-void Stage::Update()
+Stage::~Stage()
 {
 
+}
+
+void Stage::Start()
+{
+	pPlayer = new Player;
+	pPlayer->Start();
+}
+
+void Stage::Update()
+{
+	cout << "Stage" << endl;
+	if(GetAsyncKeyState('A'))
+		SceneManager::GetInstance()->SetScene
 }
 
 void Stage::Render()
