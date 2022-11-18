@@ -20,9 +20,7 @@ void Logo::Update()
 {
 	cout << "Logo" << endl;
 	if (GetAsyncKeyState('A'))
-	{
-
-	}
+		SceneManager::GetInstance()->SetScene(SCENEID_MENU);
 }
 
 void Logo::Render()

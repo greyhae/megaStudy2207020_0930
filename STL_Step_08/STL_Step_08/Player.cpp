@@ -13,15 +13,18 @@ Player::~Player()
 
 void Player::Start()
 {
-	DWORD key = InputManager::GetInstance()->GetKey();
 
-	if (key & KEYID_UP)
-		cout << "KEYID_UP" << endl;
 }
 
 void Player::Update()
 {
+	DWORD key = InputManager::GetInstance()->GetKey();
 
+	if (key & KEYID_UP)
+		cout << "KEYID_UP" << endl;
+
+	if (key & KEYID_DOWN)
+		cout << "KEYID_DOWN" << endl;
 }
 
 void Player::Render()

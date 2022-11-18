@@ -49,6 +49,9 @@
     <Filter Include="소스 파일\Manager\InputManager">
       <UniqueIdentifier>{c1d05327-0e29-4f63-a7ee-66772ef9e158}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Manager\Prototype">
+      <UniqueIdentifier>{93f0a130-ad39-4727-a7d7-fa657d901649}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -130,6 +133,9 @@
     </ClInclude>
     <ClInclude Include="DataManager.h">
       <Filter>소스 파일\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Prototype.h">
+      <Filter>소스 파일\Manager\Prototype</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

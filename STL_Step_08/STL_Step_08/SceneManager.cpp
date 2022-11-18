@@ -8,7 +8,7 @@
 SceneManager* SceneManager::Instance = nullptr;
 
 
-SceneManager::SceneManager()
+SceneManager::SceneManager() : SceneState(nullptr)
 {
 
 }
@@ -26,16 +26,16 @@ void SceneManager::SetScene(Scene_ID id)
 
 	switch (id)
 	{
-	case SCENE_LOGO:
+	case SCENEID_LOGO:
 		SceneState = new Logo;
 		break;
-	case SCENE_MENU:
+	case SCENEID_MENU:
 		SceneState = new Menu;
 		break;
-	case SCENE_STAGE:
+	case SCENEID_STAGE:
 		SceneState = new Stage;
 		break;
-	case SCENE_EXIT:
+	case SCENEID_EXIT:
 		exit(NULL);
 		break;
 	}
@@ -48,10 +48,10 @@ void SceneManager::Update()
 
 void SceneManager::Render()
 {
-
+	SceneState->Render();
 }
 
 void SceneManager::Release()
 {
-
+	::Safe_Release(SceneState);
 }

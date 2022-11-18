@@ -1,6 +1,7 @@
 #pragma once
 #include "Headers.h"
 
+class Scene;
 class SceneManager
 {
 private:
@@ -12,8 +13,10 @@ public:
 			Instance = new SceneManager;
 		return Instance;
 	}
+private:
+	Scene* SceneState;
 public:
-	void SetScene(Scene_ID ID);
+	void SetScene(Scene_ID id);
 	void Update();
 	void Render();
 	void Release();

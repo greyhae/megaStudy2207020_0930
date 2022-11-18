@@ -4,6 +4,8 @@
 class Object;
 class Stage : public Scene
 {
+private:
+	Object* pPlayer;
 	virtual void Start()override;
 	virtual void Update()override;
 	virtual void Render()override;

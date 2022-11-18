@@ -21,14 +21,17 @@ void Stage::Start()
 
 void Stage::Update()
 {
+	pPlayer->Render();
+	/*
 	cout << "Stage" << endl;
-	if(GetAsyncKeyState('A'))
-		SceneManager::GetInstance()->SetScene
+	if (GetAsyncKeyState('A'))
+		SceneManager::GetInstance()->SetScene(SCENEID_EXIT);
+	*/
 }
 
 void Stage::Render()
 {
-
+	pPlayer->Render();
 }
 
 void Stage::Release()
