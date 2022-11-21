@@ -15,6 +15,9 @@ public:
 	}
 private:
 	list<Object*> ObjectList;
+public:
+	void DisableFormEnable();
+	void Render();
 private:
 	ObjectManager();
 public:

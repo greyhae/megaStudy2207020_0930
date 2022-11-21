@@ -13,6 +13,11 @@ public:
 		return Instance;
 	}
 private:
+	map<string, Object*> PrototypeObjects;
+public:
+	void Initialize();
+	Object* FindObject(string _key);
+private:
 	Prototype() {}
 public:
 	~Prototype() {}

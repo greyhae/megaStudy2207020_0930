@@ -10,6 +10,10 @@ inline void Safe_Release(T* _Obj)
 	}
 }
 
+#define ErrorMessage(Str) (\
+cout << "Error : where (" << __FILE__ << ") line (" << __LINE__ << ")" << endl\
+	system("pause");
+
 const int KEYID_UP		= 0X00000001;// 1
 const int KEYID_DOWN	= 0X00000002;// 2
 const int KEYID_LEFT	= 0X00000004;// 4
