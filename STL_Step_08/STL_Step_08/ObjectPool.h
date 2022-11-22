@@ -16,18 +16,19 @@ public:
 private:
 	map<string, list<Object*>> EnableList;
 	map<string, list<Object*>> DisableList;
+	map<string, int> Counts;
 public:
-	map<string, list<Object*>> GetEnableList() { return &EnableList; }
-	map<string, list<Object*>> GetDisableList() { return &DisableList; }
+	map<string, list<Object*>>* GetEnableList() { return &EnableList; }
+	map<string, list<Object*>>* GetDisableList() { return &DisableList; }
 public:
-	void CreateObject(string key);
+	bool CreateObject(string _key);
 
 	// ** ÀÐ±â
-	void FindObject();
+	list<Object*>* FindObjectList(string _key);
 	void Update();
 
-	Object* Pop(string _key);
-	void Erase();
+	Object* Insert(string _key);
+	void Erase(Object* _Obj);
 	
 	void Release();
 private:

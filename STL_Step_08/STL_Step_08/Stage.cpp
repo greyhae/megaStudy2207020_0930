@@ -2,6 +2,7 @@
 #include "SceneManager.h"
 #include "Player.h"
 #include "Prototype.h"
+#include "InputManager.h"
 
 
 Stage::Stage()
@@ -53,6 +54,10 @@ void Stage::Update()
 	if (GetAsyncKeyState('A'))
 		SceneManager::GetInstance()->SetScene(SCENEID_EXIT);
 	*/
+
+	DWORD key = InputManager::GetInstance()->GetKey();
+
+	if(key & KEYID_ENTER)
 }
 
 void Stage::Render()

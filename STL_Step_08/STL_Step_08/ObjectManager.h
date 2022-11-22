@@ -14,9 +14,13 @@ public:
 		return Instance;
 	}
 private:
-	list<Object*> ObjectList;
+	map< string, list<Object*>>* EnableList;
+	map< string, list<Object*>>* DisbleList;
 public:
+	void Initialize();
 	void DisableFormEnable();
+	//void EnableFormDisable(Object* _pObj)
+	void EnableFormDisable();
 	void Render();
 private:
 	ObjectManager();

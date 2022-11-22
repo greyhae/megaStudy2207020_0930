@@ -1,5 +1,7 @@
 #include "ObjectPool.h"
 #include "Prototype.h"
+#include "Object.h"
+
 // ** 생성 / 읽기,쓰기(덮어쓰기, 변경)
 
 ObjectPool* ObjectPool::Instance = nullptr;
@@ -14,43 +16,91 @@ ObjectPool::~ObjectPool()
 	Release();
 }
 
-void ObjectPool::CreateObject(string key)
+bool ObjectPool::CreateObject(string _key)
 {
+	// 복사생성
+	Object* ProtoObject = Prototype::GetInstance()->FindObject("Player");
+	//FALIED(ProtoObject, __LINE__);
 
-}
+	//Counts.find(_key)->second
 
-Object* ObjectPool::Pop(string _key)
-{
-	auto iter = DisableList.find(_key);
-
-	START;
-
-	if (iter == DisableList.end())
+	if (ProtoObject != nullptr)
 	{
-		// 생성
-		Object* ProtoObject = Prototype::GetInstance()->FindObject("Player");
-
-		if (ProtoObject != nullptr)
+		auto iter = DisableList.find(_key);
+		if (iter == DisableList.end())
 		{
+			Counts.insert(make_pair(_key, 0));
+
 			list<Object*> temp;
 			for (int i = 0; i < 5; ++i)
 			{
-				temp.push_back(ProtoObject->Clone());
-				DisableList.insert(make_pair(_key, temp));
+				Object* pObj = ProtoObject->Clone();
+				pObj->SetSpace(&temp);
+				//pObj->SetSpace(Counts.find);
+				temp.push_back(pObj);
 			}
-			goto START;
-
+			DisableList.insert(make_pair(_key, temp));
 		}
 		else
-			return nullptr;
+		{
+			for (int i = 0; i < 5; ++i)
+			{
+				Object* pObj = ProtoObject->Clone();
+				pObj->SetSpace(&temp);
+				temp.push_back(pObj);
+			}
+		}
+		return true;
+	}
+	return false;
+}
+
+list<Object*>* ObjectPool::FindObjectList(string _key)
+{
+	return nullptr;
+}
+
+
+Object* ObjectPool::Insert(string _key)
+{
+	START;
+	auto iter = FindObjectList(_key);
+
+
+	if (iter == nullptr)
+	{
+		CREAT;
+		if (CreateObject(_key))
+			ErrorMessage(__LIME__);
+			goto START;
 	}
 	else
 	{
-		Object* pObj = iter->second.back();
-		return iter->second.pop_back();
-		retrun pObj;
+		if (iter->empty())
+		{
+			Object* pObj = iter->back();
+			iter->pop_back();
+			return pObj;
+		}
+		else
+			goto CREAT;
 	}
 
+}
+
+void ObjectPool::Erase(Object* _Obj)
+{
+	auto iter = _Obj->GetInstance();
+
+	// 이 부분 문제 발생
+	for (auto iter2 = iter->begin(); iter2 != iter->end(); ++iter2)
+	{
+		if(_Obj)
+
+	}
+	//auto iter = EnableList.find(_Obj->GetKey());
+
+	
 }
 
 void ObjectPool::Release()

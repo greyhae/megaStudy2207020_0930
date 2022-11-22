@@ -11,6 +11,11 @@ Player::~Player()
 
 }
 
+Object* Player::Initialize()
+{
+	return nullptr;
+}
+
 void Player::Start()
 {
 

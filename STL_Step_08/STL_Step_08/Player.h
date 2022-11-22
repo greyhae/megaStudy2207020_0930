@@ -3,6 +3,7 @@
 
 class Player : public Object
 {
+	virtual Object* Initialize()override;
 	virtual void Start()override;
 	virtual void Update()override;
 	virtual void Render()override;

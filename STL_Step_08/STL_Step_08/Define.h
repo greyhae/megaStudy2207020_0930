@@ -7,12 +7,13 @@ inline void Safe_Release(T* _Obj)
 	if (_Obj)
 	{
 		delete _Obj;
+		_Obj = nullptr;
 	}
 }
 
-#define ErrorMessage(Str) (\
-cout << "Error : where (" << __FILE__ << ") line (" << __LINE__ << ")" << endl\
-	system("pause");
+#define ErrorMessage(Str) (cout << "Error : where (" << __FILE__ << ") line (" << __LINE__ << ")" << endl;\
+	system("pause");}
+
 
 const int KEYID_UP		= 0X00000001;// 1
 const int KEYID_DOWN	= 0X00000002;// 2
